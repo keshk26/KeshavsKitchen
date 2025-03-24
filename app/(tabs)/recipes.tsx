@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ScrollView, Pressable } from 'react-native';
+import { View, Text, ScrollView, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 const RecipesScreen = () => {
@@ -27,30 +27,41 @@ const RecipesScreen = () => {
   ];
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>My Recipes</Text>
+    <ScrollView className="flex-1 bg-bgDefault">
+      <View className="p-5 bg-white border-b border-gray-200">
+        <Text className="text-2xl font-bold text-gray-800">My Recipes</Text>
       </View>
 
-      <View style={styles.recipeList}>
+      <View className="p-4">
         {recipes.map((recipe) => (
-          <Pressable key={recipe.id} style={styles.recipeCard}>
-            <View style={styles.recipeContent}>
-              <Text style={styles.recipeTitle}>{recipe.title}</Text>
-              <Text style={styles.recipeCuisine}>{recipe.cuisine}</Text>
+          <Pressable
+            key={recipe.id}
+            className="flex-row items-center p-4 mb-4 bg-white shadow-sm rounded-xl"
+          >
+            <View className="flex-1">
+              <Text className="mb-1 text-lg font-semibold text-gray-800">
+                {recipe.title}
+              </Text>
+              <Text className="mb-2 text-sm text-gray-600">
+                {recipe.cuisine}
+              </Text>
 
-              <View style={styles.recipeMetaContainer}>
-                <View style={styles.recipeMeta}>
+              <View className="flex-row gap-4">
+                <View className="flex-row items-center gap-1">
                   <Ionicons name="time-outline" size={16} color="#666" />
-                  <Text style={styles.recipeMetaText}>{recipe.time}</Text>
+                  <Text className="text-sm text-gray-600">
+                    {recipe.time}
+                  </Text>
                 </View>
-                <View style={styles.recipeMeta}>
+                <View className="flex-row items-center gap-1">
                   <Ionicons name="speedometer-outline" size={16} color="#666" />
-                  <Text style={styles.recipeMetaText}>{recipe.difficulty}</Text>
+                  <Text className="text-sm text-gray-600">
+                    {recipe.difficulty}
+                  </Text>
                 </View>
               </View>
             </View>
-            <Pressable style={styles.favoriteButton}>
+            <Pressable className="p-2">
               <Ionicons name="heart-outline" size={24} color="#FF6B6B" />
             </Pressable>
           </Pressable>
@@ -59,69 +70,5 @@ const RecipesScreen = () => {
     </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f5f5f5',
-  },
-  header: {
-    padding: 20,
-    backgroundColor: '#fff',
-    borderBottomWidth: 1,
-    borderBottomColor: '#eee',
-  },
-  headerTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#333',
-  },
-  recipeList: {
-    padding: 16,
-  },
-  recipeCard: {
-    backgroundColor: '#fff',
-    borderRadius: 12,
-    marginBottom: 16,
-    padding: 16,
-    flexDirection: 'row',
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 3,
-  },
-  recipeContent: {
-    flex: 1,
-  },
-  recipeTitle: {
-    fontSize: 18,
-    fontWeight: '600',
-    marginBottom: 4,
-    color: '#333',
-  },
-  recipeCuisine: {
-    fontSize: 14,
-    color: '#666',
-    marginBottom: 8,
-  },
-  recipeMetaContainer: {
-    flexDirection: 'row',
-    gap: 16,
-  },
-  recipeMeta: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 4,
-  },
-  recipeMetaText: {
-    fontSize: 14,
-    color: '#666',
-  },
-  favoriteButton: {
-    padding: 8,
-  },
-});
 
 export default RecipesScreen; 
