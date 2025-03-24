@@ -1,7 +1,7 @@
 import { View, Text, ScrollView, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-const RecipesScreen = () => {
+const Recipes = () => {
   const recipes = [
     {
       id: 1,
@@ -71,4 +71,4 @@ const RecipesScreen = () => {
   );
 }
 
-export default RecipesScreen; 
+export default Recipes; 

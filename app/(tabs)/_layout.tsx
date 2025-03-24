@@ -8,7 +8,7 @@ const TabLayout = () => {
       tabBarActiveTintColor: '#FF6B6B',
     }}>
       <Tabs.Screen
-        name="recipes"
+        name="index"
         options={{
           title: "Recipes",
           tabBarIcon: ({ color, size }) => (
