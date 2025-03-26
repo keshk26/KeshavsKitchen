@@ -1,30 +1,9 @@
 import { View, Text, ScrollView, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import useRecipe from './useRecipe';
 
 const Recipes = () => {
-  const recipes = [
-    {
-      id: 1,
-      title: 'Butter Chicken',
-      cuisine: 'Indian',
-      time: '45 mins',
-      difficulty: 'Medium',
-    },
-    {
-      id: 2,
-      title: 'Palak Paneer',
-      cuisine: 'Indian',
-      time: '30 mins',
-      difficulty: 'Easy',
-    },
-    {
-      id: 3,
-      title: 'Chicken Biryani',
-      cuisine: 'Indian',
-      time: '60 mins',
-      difficulty: 'Hard',
-    },
-  ];
+  const { recipes } = useRecipe()
 
   return (
     <ScrollView className="flex-1 bg-bgDefault">
@@ -40,23 +19,19 @@ const Recipes = () => {
           >
             <View className="flex-1">
               <Text className="mb-1 text-lg font-semibold text-gray-800">
-                {recipe.title}
+                {recipe.name}
               </Text>
-              <Text className="mb-2 text-sm text-gray-600">
-                {recipe.cuisine}
-              </Text>
-
               <View className="flex-row gap-4">
                 <View className="flex-row items-center gap-1">
                   <Ionicons name="time-outline" size={16} color="#666" />
                   <Text className="text-sm text-gray-600">
-                    {recipe.time}
+                    {recipe.time} minutes
                   </Text>
                 </View>
                 <View className="flex-row items-center gap-1">
-                  <Ionicons name="speedometer-outline" size={16} color="#666" />
+                  <Ionicons name="list" size={16} color="#666" />
                   <Text className="text-sm text-gray-600">
-                    {recipe.difficulty}
+                    {recipe.ingredients.length} ingredients
                   </Text>
                 </View>
               </View>

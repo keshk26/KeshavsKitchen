@@ -2,8 +2,8 @@ import { render, screen } from '@testing-library/react-native';
 import Recipes from './Recipes';
 
 describe('Recipes Component', () => {
-  it('renders correctly', () => {
+  test('Header renders correctly', () => {
     render(<Recipes />);
-    expect(screen.getByText('My Recipes')).toBeTruthy();
+    expect(screen.getByText('My Recipes')).toBeOnTheScreen();
   });
 });
