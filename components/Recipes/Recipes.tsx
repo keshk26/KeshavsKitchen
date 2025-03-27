@@ -1,9 +1,14 @@
 import { View, Text, ScrollView, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import useRecipe from './useRecipe';
+import { router } from 'expo-router';
 
 const Recipes = () => {
   const { recipes } = useRecipe()
+
+  const handleRecipePress = (id: string) => {
+    router.push(`/recipes/${id}`);
+  };
 
   return (
     <ScrollView className="flex-1 bg-bgDefault">
@@ -16,6 +21,7 @@ const Recipes = () => {
           <Pressable
             key={recipe.id}
             className="flex-row items-center p-4 mb-4 bg-white shadow-sm rounded-xl"
+            onPress={() => handleRecipePress(recipe.id)}
           >
             <View className="flex-1">
               <Text className="mb-1 text-lg font-semibold text-gray-800">

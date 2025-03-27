@@ -1,19 +1,21 @@
-import { Tabs } from "expo-router";
-import { Ionicons } from "@expo/vector-icons";
+import { Tabs } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
 
-const TabLayout = () => {
+export default function TabLayout() {
   return (
-    <Tabs screenOptions={{
-      headerShown: true,
-      tabBarActiveTintColor: '#FF6B6B',
-    }}>
+    <Tabs
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
       <Tabs.Screen
-        name="index"
+        name="recipes"
         options={{
-          title: "Recipes",
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="restaurant" size={size} color={color} />
+          title: 'Recipes',
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="restaurant-outline" size={24} color={color} />
           ),
+          headerShown: false
         }}
       />
       <Tabs.Screen
@@ -27,6 +29,4 @@ const TabLayout = () => {
       />
     </Tabs>
   );
-}
-
-export default TabLayout; 
+} 
