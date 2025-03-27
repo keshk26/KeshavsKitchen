@@ -5,42 +5,20 @@ jest.mock('@expo/vector-icons', () => ({
   Ionicons: 'Ionicons',
 }));
 
-// Setup global error handler
-global.ErrorUtils = {
-  setGlobalHandler: () => { },
-  getGlobalHandler: () => { },
-};
-
-// Mock react-native-reanimated
-jest.mock('react-native-reanimated', () => {
-  const Reanimated = require('react-native-reanimated/mock');
-  Reanimated.default.call = () => { };
-  return Reanimated;
-});
-
-// Mock react-native-gesture-handler
-jest.mock('react-native-gesture-handler', () => {
-  const View = require('react-native/Libraries/Components/View/View');
+// Mock the firebase.config module
+jest.mock('./firebase.config', () => {
   return {
-    State: {},
-    PanGestureHandler: View,
-    BaseButton: View,
-    TouchableOpacity: View,
-    ScrollView: View,
-    PanGestureHandlerGestureEvent: jest.fn(),
-    useAnimatedGestureHandler: jest.fn(),
-    useAnimatedStyle: jest.fn(),
-    useSharedValue: jest.fn(),
-    withSpring: jest.fn(),
-    withTiming: jest.fn(),
-    runOnJS: jest.fn(),
+    __esModule: true,
+    db: {
+      type: 'firestore',
+      toJSON: () => 'firestore'
+    }
   };
 });
 
-// Setup global fetch mock
-global.fetch = jest.fn();
-
-// Setup error handler mock
-global.ErrorHandler = (error, isFatal) => {
-  console.error(error);
-}; 
+// Mock firebase/firestore module
+jest.mock('@firebase/firestore', () => ({
+  collection: jest.fn(),
+  getDocs: jest.fn(),
+  query: jest.fn()
+}));

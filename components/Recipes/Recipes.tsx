@@ -23,6 +23,12 @@ const Recipes = () => {
               </Text>
               <View className="flex-row gap-4">
                 <View className="flex-row items-center gap-1">
+                  <Ionicons name="restaurant-outline" size={16} color="#666" />
+                  <Text className="text-sm text-gray-600">
+                    {recipe.cuisine}
+                  </Text>
+                </View>
+                <View className="flex-row items-center gap-1">
                   <Ionicons name="time-outline" size={16} color="#666" />
                   <Text className="text-sm text-gray-600">
                     {recipe.time} minutes
