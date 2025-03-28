@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react-native';
 import Recipes from './Recipes';
 import { collection, getDocs, query } from '@firebase/firestore';
-import { mockRecipes } from '../../__mocks__/firebase.config';
+import mockRecipes from './recipes.mock';
 
 describe('Recipes', () => {
   beforeEach(() => {
@@ -38,6 +38,12 @@ describe('Recipes', () => {
     // Verify recipe details
     expect(screen.getByText('Thai')).toBeOnTheScreen();
     expect(screen.getByText('30 minutes')).toBeOnTheScreen();
-    expect(screen.getByText('4 ingredients')).toBeOnTheScreen();
+    expect(screen.getByText('3 ingredients')).toBeOnTheScreen();
+    // Wait for and verify the recipe title
+    expect(screen.getByText('Margarita')).toBeOnTheScreen();
+    // Verify recipe details
+    expect(screen.getByText('Mexican')).toBeOnTheScreen();
+    expect(screen.getByText('5 minutes')).toBeOnTheScreen();
+    expect(screen.getByText('3 ingredients')).toBeOnTheScreen();
   });
 });

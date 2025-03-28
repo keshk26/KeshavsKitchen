@@ -1,15 +1,7 @@
 import { useState, useEffect } from "react";
 import { collection, getDocs, query } from "@firebase/firestore";
 import { db } from "../../firebase.config";
-
-export interface Recipe {
-  id: string;
-  name: string;
-  cuisine: string;
-  time: number;
-  ingredients: string[];
-  instructions: string[];
-}
+import Recipe from "@/types/Recipe";
 
 const useRecipe = () => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
