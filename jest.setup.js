@@ -12,7 +12,7 @@ jest.mock('expo-router', () => ({
 }));
 
 // Mock the firebase.config module
-jest.mock('./firebase.config', () => {
+jest.mock('@/firebase/config', () => {
   return {
     __esModule: true,
     db: {

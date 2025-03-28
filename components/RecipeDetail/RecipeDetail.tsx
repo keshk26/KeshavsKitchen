@@ -1,8 +1,10 @@
 import { View, Text, ScrollView, ActivityIndicator } from 'react-native';
 import useRecipeDetail from './useRecipeDetail';
+import { useLocalSearchParams } from 'expo-router';
 
 const RecipeDetail = () => {
-  const { recipe, loading } = useRecipeDetail();
+  const { id } = useLocalSearchParams<{ id: string }>();
+  const { recipe, loading } = useRecipeDetail(id);
 
   if (loading) {
     return (

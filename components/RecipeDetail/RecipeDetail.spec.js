@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react-native';
 import RecipeDetail from './RecipeDetail';
 import { useLocalSearchParams } from 'expo-router';
 import { doc, getDoc } from '@firebase/firestore';
-import { db } from '../../firebase.config';
+import { db } from '../../firebase/config';
 import mockRecipe from './recipe.mock';
 
 // Mock expo-router
