@@ -1,4 +1,7 @@
 import { Stack } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
+import { Pressable } from 'react-native';
+import { router } from 'expo-router';
 
 export default function RecipesLayout() {
   return (
@@ -14,7 +17,12 @@ export default function RecipesLayout() {
         name="[id]"
         options={{
           title: '',
-          headerShown: true
+          headerShown: true,
+          headerLeft: () => (
+            <Pressable onPress={() => router.back()}>
+              <Ionicons name="arrow-back" size={24} color="#FF4B4B" />
+            </Pressable>
+          )
         }}
       />
     </Stack>
