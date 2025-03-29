@@ -27,6 +27,7 @@ const RecipeDetail = () => {
   useEffect(() => {
     if (!loading && recipe) {
       navigation.setOptions({
+        title: recipe.name,
         headerRight: () => (
           <Pressable
             onPress={toggleFavorite}
@@ -56,8 +57,6 @@ const RecipeDetail = () => {
   return (
     <ScrollView className="flex-1 bg-bgDefault">
       <View className="p-4">
-        <Text className="mb-4 text-3xl font-bold">{recipe.name}</Text>
-
         <View className="mb-6">
           <Text className="text-gray-600">Cuisine: {recipe.cuisine}</Text>
           <Text className="text-gray-600">Time: {recipe.time} minutes</Text>

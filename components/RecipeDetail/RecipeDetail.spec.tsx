@@ -56,8 +56,7 @@ describe('RecipeDetail', () => {
     expect(onSnapshot).toHaveBeenCalledWith(mockDocRef, expect.any(Function));
 
     // Wait for recipe details to be displayed
-    expect(await screen.findByText('Green Curry Fried Rice')).toBeOnTheScreen();
-    expect(screen.getByText('Cuisine: Thai')).toBeOnTheScreen();
+    expect(await screen.findByText('Cuisine: Thai')).toBeOnTheScreen();
     expect(screen.getByText('Time: 30 minutes')).toBeOnTheScreen();
     expect(screen.getByText('Ingredients')).toBeOnTheScreen();
     expect(screen.getByText('Instructions')).toBeOnTheScreen();
@@ -76,9 +75,6 @@ describe('RecipeDetail', () => {
   test('should toggle favorite status', async () => {
     render(<RecipeDetail />);
 
-    // Wait for the component to render and set header options
-    await screen.findByText('Green Curry Fried Rice');
-
     // Get the mock function from the jest.mock setup
     const mockNavigation = jest.requireMock('expo-router').useNavigation();
     const setOptionsCalls = mockNavigation.setOptions.mock.calls;
@@ -89,10 +85,10 @@ describe('RecipeDetail', () => {
     const HeaderRight = headerOptions.headerRight;
 
     // Render the header right component
-    const { getByTestId } = render(<HeaderRight />);
+    const { findByTestId } = render(<HeaderRight />);
 
     // Find and click the favorite button
-    const favoriteButton = getByTestId('favorite-button');
+    const favoriteButton = await findByTestId('favorite-button');
     fireEvent.press(favoriteButton);
 
     // Verify updateDoc was called with correct params

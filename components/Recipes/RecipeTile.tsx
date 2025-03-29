@@ -1,0 +1,53 @@
+import { View, Text, Pressable } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { Recipe } from '@/types';
+
+interface RecipeTileProps {
+  recipe: Recipe;
+  onPress: (id: string) => void;
+  onFavoritePress: (recipe: Recipe) => void;
+}
+
+const RecipeTile = ({ recipe, onPress, onFavoritePress }: RecipeTileProps) => {
+  return (
+    <Pressable
+      className="flex-row items-center p-4 mb-4 bg-white shadow-sm rounded-xl"
+      onPress={() => onPress(recipe.id)}
+    >
+      <View className="flex-1">
+        <Text className="mb-1 text-lg font-semibold text-gray-800">
+          {recipe.name}
+        </Text>
+        <View className="flex-row gap-4">
+          <View className="flex-row items-center gap-1">
+            <Ionicons name="restaurant-outline" size={16} color="#666" />
+            <Text className="text-sm text-gray-600">
+              {recipe.cuisine}
+            </Text>
+          </View>
+          <View className="flex-row items-center gap-1">
+            <Ionicons name="time-outline" size={16} color="#666" />
+            <Text className="text-sm text-gray-600">
+              {recipe.time} minutes
+            </Text>
+          </View>
+          <View className="flex-row items-center gap-1">
+            <Ionicons name="list" size={16} color="#666" />
+            <Text className="text-sm text-gray-600">
+              {recipe.ingredients.length} ingredients
+            </Text>
+          </View>
+        </View>
+      </View>
+      <Pressable className="p-2" onPress={() => onFavoritePress(recipe)}>
+        <Ionicons
+          name={recipe.favorite ? "heart" : "heart-outline"}
+          size={24}
+          color="#FF6B6B"
+        />
+      </Pressable>
+    </Pressable>
+  );
+};
+
+export default RecipeTile; 

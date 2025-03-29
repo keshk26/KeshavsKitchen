@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Recipe from "@/types/Recipe";
+import { Recipe } from "@/types";
 import subscribeToRecipe from "@/firebase/subscribeToRecipe";
 
 const useRecipeDetail = (id: string) => {

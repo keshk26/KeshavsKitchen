@@ -1,7 +1,7 @@
-import { View, Text, ScrollView } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons } from "@expo/vector-icons";
+import { View, Text, ScrollView } from "react-native";
 
-const Favorites = () => {
+const NoFavorites = () => {
   return (
     <ScrollView className="flex-1 bg-bgDefault">
       <View className="p-5 bg-white border-b border-gray-200">
@@ -21,6 +21,6 @@ const Favorites = () => {
       </View>
     </ScrollView>
   );
-}
+};
 
-export default Favorites; 
+export default NoFavorites

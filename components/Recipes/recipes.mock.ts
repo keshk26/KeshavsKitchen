@@ -1,4 +1,4 @@
-import Recipe from '@/types/Recipe';
+import { Recipe } from '@/types';
 
 const mockRecipes: Recipe[] = [
   {

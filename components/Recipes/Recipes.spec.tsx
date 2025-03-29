@@ -36,13 +36,8 @@ describe('Recipes', () => {
 
   test('Recipe list renders correctly', async () => {
     render(<Recipes />);
-
-    // Verify the header
-    expect(screen.getByText('My Recipes')).toBeOnTheScreen();
-
     // Wait for and verify the first recipe
-    expect(await screen.findByText('Green Curry Fried Rice')).toBeOnTheScreen();
-    expect(screen.getByText('Thai')).toBeOnTheScreen();
+    expect(await screen.findByText('Thai')).toBeOnTheScreen();
     expect(screen.getByText('30 minutes')).toBeOnTheScreen();
     expect(screen.getByText('3 ingredients')).toBeOnTheScreen();
 

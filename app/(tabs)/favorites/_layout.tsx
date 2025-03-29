@@ -6,7 +6,14 @@ export default function FavoritesLayout() {
       <Stack.Screen
         name="index"
         options={{
-          title: "Favorites",
+          title: "Favorite Recipes",
+          headerShown: true
+        }}
+      />
+      <Stack.Screen
+        name="[id]"
+        options={{
+          title: '',
           headerShown: true
         }}
       />

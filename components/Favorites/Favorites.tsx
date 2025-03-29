@@ -1,15 +1,17 @@
+import React from 'react';
 import { View, Text, ScrollView, ActivityIndicator } from 'react-native';
-import useRecipe from './useRecipe';
+import useRecipe from '../Recipes/useRecipe';
 import { router } from 'expo-router';
 import updateRecipe from '@/firebase/updateRecipe';
 import { Recipe } from '@/types';
-import RecipeTile from './RecipeTile';
+import RecipeTile from '../Recipes/RecipeTile';
+import NoFavorites from './NoFavorites';
 
-const Recipes = () => {
-  const { recipes, loading } = useRecipe()
+const Favorites = () => {
+  const { recipes, loading } = useRecipe({ favorite: true });
 
   const handleRecipePress = (id: string) => {
-    router.push(`/recipes/${id}`);
+    router.push(`/favorites/${id}`);
   };
 
   const handleFavoritePress = async (recipe: Recipe) => {
@@ -25,6 +27,12 @@ const Recipes = () => {
       <View className="items-center justify-center flex-1 bg-bgDefault">
         <ActivityIndicator size="large" />
       </View>
+    );
+  }
+
+  if (recipes.length === 0) {
+    return (
+      <NoFavorites />
     );
   }
 
@@ -44,4 +52,4 @@ const Recipes = () => {
   );
 }
 
-export default Recipes; 
+export default Favorites; 

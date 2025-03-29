@@ -13,7 +13,7 @@ export default function RecipesLayout() {
       <Stack.Screen
         name="[id]"
         options={{
-          headerTitle: "Recipe Details",
+          title: '',
           headerShown: true
         }}
       />

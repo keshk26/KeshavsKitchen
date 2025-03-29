@@ -1,4 +1,4 @@
-export default interface Recipe {
+export interface Recipe {
   id: string;
   name: string;
   cuisine: string;
@@ -7,3 +7,7 @@ export default interface Recipe {
   instructions: string[];
   favorite?: boolean;
 }
+
+export type FilterOptions = {
+  favorite?: boolean;
+}; 
