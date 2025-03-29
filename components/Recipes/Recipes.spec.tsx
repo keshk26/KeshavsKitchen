@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react-native';
 import Recipes from './Recipes';
-import { collection, getDocs, query } from '@firebase/firestore';
+import { collection, onSnapshot, query } from '@firebase/firestore';
 import mockRecipes from './recipes.mock';
 
 describe('Recipes', () => {
@@ -20,30 +20,46 @@ describe('Recipes', () => {
     // Mock query to return the same ref
     (query as jest.Mock).mockReturnValue(mockCollectionRef);
 
-    // Mock getDocs to return our test data
-    (getDocs as jest.Mock).mockResolvedValue({
-      docs: mockRecipes.map(recipe => ({
-        id: recipe.id,
-        data: () => recipe,
-        exists: () => true
-      }))
+    // Mock onSnapshot to immediately call the callback with our test data
+    (onSnapshot as jest.Mock).mockImplementation((query, callback) => {
+      callback({
+        docs: mockRecipes.map(recipe => ({
+          id: recipe.id,
+          data: () => recipe,
+          exists: () => true
+        }))
+      });
+      // Return an unsubscribe function
+      return jest.fn();
     });
   });
 
   test('Recipe list renders correctly', async () => {
-    render(<Recipes />)
+    render(<Recipes />);
+
+    // Verify the header
     expect(screen.getByText('My Recipes')).toBeOnTheScreen();
-    // Wait for and verify the recipe title
+
+    // Wait for and verify the first recipe
     expect(await screen.findByText('Green Curry Fried Rice')).toBeOnTheScreen();
-    // Verify recipe details
     expect(screen.getByText('Thai')).toBeOnTheScreen();
     expect(screen.getByText('30 minutes')).toBeOnTheScreen();
     expect(screen.getByText('3 ingredients')).toBeOnTheScreen();
-    // Wait for and verify the recipe title
+
+    // Verify the second recipe
     expect(screen.getByText('Margarita')).toBeOnTheScreen();
-    // Verify recipe details
     expect(screen.getByText('Mexican')).toBeOnTheScreen();
     expect(screen.getByText('5 minutes')).toBeOnTheScreen();
-    expect(screen.getByText('3 ingredients')).toBeOnTheScreen();
+    expect(screen.getByText('5 ingredients')).toBeOnTheScreen();
+  });
+
+  test('Subscription is cleaned up on unmount', () => {
+    const unsubscribe = jest.fn();
+    (onSnapshot as jest.Mock).mockReturnValue(unsubscribe);
+
+    const { unmount } = render(<Recipes />);
+    unmount();
+
+    expect(unsubscribe).toHaveBeenCalled();
   });
 });

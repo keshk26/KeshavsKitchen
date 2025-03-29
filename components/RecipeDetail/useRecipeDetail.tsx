@@ -1,25 +1,16 @@
-import { useState } from "react";
-import { db } from "@/firebase/config";
-import { doc, getDoc } from "@firebase/firestore";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import Recipe from "@/types/Recipe";
-import getRecipe from "@/firebase/getRecipe";
+import subscribeToRecipe from "@/firebase/subscribeToRecipe";
 
 const useRecipeDetail = (id: string) => {
   const [recipe, setRecipe] = useState<Recipe | null>(null);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
-    (async () => {
-      try {
-        const recipe = await getRecipe(id);
-        setRecipe(recipe);
-      } catch (error) {
-        console.error('Error fetching recipe:', error);
-      } finally {
-        setLoading(false);
-      }
-    })();
+    const unsubscribe = subscribeToRecipe(id, (recipe) => {
+      setRecipe(recipe);
+      setLoading(false);
+    });
+    return () => unsubscribe();
   }, [id]);
 
   return { recipe, loading };

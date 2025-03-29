@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, Pressable } from 'react-native';
+import { View, Text, ScrollView, Pressable, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import useRecipe from './useRecipe';
 import { router } from 'expo-router';
@@ -6,7 +6,7 @@ import updateRecipe from '@/firebase/updateRecipe';
 import Recipe from '@/types/Recipe';
 
 const Recipes = () => {
-  const { recipes, refetchRecipes } = useRecipe()
+  const { recipes, loading } = useRecipe()
 
   const handleRecipePress = (id: string) => {
     router.push(`/recipes/${id}`);
@@ -15,11 +15,18 @@ const Recipes = () => {
   const handleFavoritePress = async (recipe: Recipe) => {
     try {
       await updateRecipe(recipe.id, { favorite: !recipe.favorite });
-      await refetchRecipes();
     } catch (error) {
       console.error('Error updating favorite:', error);
     }
   };
+
+  if (loading || !recipes) {
+    return (
+      <View className="items-center justify-center flex-1 bg-bgDefault">
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
 
   return (
     <ScrollView className="flex-1 bg-bgDefault">
