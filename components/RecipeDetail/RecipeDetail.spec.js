@@ -7,7 +7,10 @@ import mockRecipe from './recipe.mock';
 
 // Mock expo-router
 jest.mock('expo-router', () => ({
-  useLocalSearchParams: jest.fn()
+  useLocalSearchParams: jest.fn(),
+  useNavigation: jest.fn(() => ({
+    setOptions: jest.fn()
+  }))
 }));
 
 describe('RecipeDetail', () => {

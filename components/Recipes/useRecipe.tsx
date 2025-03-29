@@ -6,22 +6,27 @@ const useRecipe = () => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const fetchRecipes = async () => {
+    try {
+      const fetchedRecipes = await getAllRecipes();
+      setRecipes(fetchedRecipes);
+    } catch (err) {
+      console.error('Error fetching recipes:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     (async () => {
-      try {
-        const fetchedRecipes = await getAllRecipes();
-        setRecipes(fetchedRecipes);
-      } catch (err) {
-        console.error('Error fetching recipes:', err);
-      } finally {
-        setLoading(false);
-      }
+      await fetchRecipes();
     })();
   }, []);
 
   return {
     recipes,
-    loading
+    loading,
+    refetchRecipes: fetchRecipes
   };
 };
 

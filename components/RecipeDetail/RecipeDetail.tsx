@@ -1,10 +1,53 @@
-import { View, Text, ScrollView, ActivityIndicator } from 'react-native';
+import { View, Text, ScrollView, ActivityIndicator, Pressable } from 'react-native';
 import useRecipeDetail from './useRecipeDetail';
-import { useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams, useNavigation } from 'expo-router';
+import { useEffect, useState, useCallback } from 'react';
+import { Ionicons } from '@expo/vector-icons';
+import updateRecipe from '@/firebase/updateRecipe';
 
 const RecipeDetail = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
   const { recipe, loading } = useRecipeDetail(id);
+  const [isFavorite, setIsFavorite] = useState(false);
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    if (recipe) {
+      setIsFavorite(recipe.favorite || false);
+    }
+  }, [recipe]);
+
+  const toggleFavorite = useCallback(async () => {
+    if (!recipe) return;
+    const toggledFavorite = !isFavorite;
+    try {
+      setIsFavorite(toggledFavorite);
+      await updateRecipe(recipe.id, { favorite: toggledFavorite });
+    } catch (error) {
+      console.error('Error updating favorite:', error);
+      setIsFavorite(!toggledFavorite);
+    }
+  }, [recipe, isFavorite]);
+
+  useEffect(() => {
+    if (recipe) {
+      navigation.setOptions({
+        headerRight: () => (
+          <Pressable
+            onPress={toggleFavorite}
+            className="mr-4"
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+          >
+            <Ionicons
+              name={isFavorite ? "heart" : "heart-outline"}
+              size={24}
+              color="#FF6B6B"
+            />
+          </Pressable>
+        ),
+      });
+    }
+  }, [recipe, isFavorite, toggleFavorite, navigation]);
 
   if (loading) {
     return (
@@ -51,4 +94,5 @@ const RecipeDetail = () => {
     </ScrollView>
   );
 }
+
 export default RecipeDetail;

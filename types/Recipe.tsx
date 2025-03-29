@@ -5,4 +5,5 @@ export default interface Recipe {
   time: number;
   ingredients: string[];
   instructions: string[];
+  favorite?: boolean;
 }

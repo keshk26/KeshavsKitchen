@@ -2,12 +2,23 @@ import { View, Text, ScrollView, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import useRecipe from './useRecipe';
 import { router } from 'expo-router';
+import updateRecipe from '@/firebase/updateRecipe';
+import Recipe from '@/types/Recipe';
 
 const Recipes = () => {
-  const { recipes } = useRecipe()
+  const { recipes, refetchRecipes } = useRecipe()
 
   const handleRecipePress = (id: string) => {
     router.push(`/recipes/${id}`);
+  };
+
+  const handleFavoritePress = async (recipe: Recipe) => {
+    try {
+      await updateRecipe(recipe.id, { favorite: !recipe.favorite });
+      await refetchRecipes();
+    } catch (error) {
+      console.error('Error updating favorite:', error);
+    }
   };
 
   return (
@@ -48,8 +59,12 @@ const Recipes = () => {
                 </View>
               </View>
             </View>
-            <Pressable className="p-2">
-              <Ionicons name="heart-outline" size={24} color="#FF6B6B" />
+            <Pressable className="p-2" onPress={() => handleFavoritePress(recipe)}>
+              <Ionicons
+                name={recipe.favorite ? "heart" : "heart-outline"}
+                size={24}
+                color="#FF6B6B"
+              />
             </Pressable>
           </Pressable>
         ))}
