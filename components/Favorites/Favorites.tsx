@@ -25,7 +25,7 @@ const Favorites = () => {
   if (loading || !recipes) {
     return (
       <View className="items-center justify-center flex-1 bg-bgDefault">
-        <ActivityIndicator size="large" />
+        <ActivityIndicator testID="activity-indicator" size="large" />
       </View>
     );
   }

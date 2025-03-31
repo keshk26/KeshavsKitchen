@@ -17,7 +17,7 @@ const mockRecipes: Recipe[] = [
       '3. Add the coconut milk and bring to a boil.',
       '4. Add the rice and cook until heated through.',
     ],
-    favorite: false
+    favorite: true
   },
   {
     id: '2',
@@ -36,26 +36,7 @@ const mockRecipes: Recipe[] = [
       'Makes around 6 cups of margarita.',
       'Serve in glass over ice.'
     ],
-    favorite: false
-  },
-  {
-    id: '3',
-    name: 'Honey Garlic Shrimp',
-    cuisine: 'Chinese',
-    time: 20,
-    ingredients: [
-      '1 lb shrimp',
-      '1/2 cup honey',
-      '1/2 cup soy sauce',
-      '1/2 cup garlic',
-    ],
-    instructions: [
-      '1. Heat a large pan over medium heat.',
-      '2. Add and fry the green curry paste for 2 minute.',
-      '3. Add the coconut milk and bring to a boil.',
-      '4. Add the rice and cook until heated through.',
-    ],
-    favorite: false
+    favorite: true
   }
 ];
 

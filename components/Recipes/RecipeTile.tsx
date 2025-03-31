@@ -39,7 +39,7 @@ const RecipeTile = ({ recipe, onPress, onFavoritePress }: RecipeTileProps) => {
           </View>
         </View>
       </View>
-      <Pressable className="p-2" onPress={() => onFavoritePress(recipe)}>
+      <Pressable className="p-2" testID={`favorite-button-${recipe.id}`} onPress={() => onFavoritePress(recipe)}>
         <Ionicons
           name={recipe.favorite ? "heart" : "heart-outline"}
           size={24}

@@ -30,5 +30,6 @@ jest.mock('@firebase/firestore', () => ({
   doc: jest.fn(),
   query: jest.fn(),
   onSnapshot: jest.fn(),
-  updateDoc: jest.fn()
+  updateDoc: jest.fn(),
+  where: jest.fn()
 }));
