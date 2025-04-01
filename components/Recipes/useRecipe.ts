@@ -2,24 +2,47 @@ import { useState, useEffect, useMemo } from 'react';
 import { Recipe, FilterOptions } from '@/types';
 import subscribeToRecipes from '@/firebase/subscribeToRecipes';
 
-const useRecipe = (filter?: FilterOptions) => {
-  const [recipes, setRecipes] = useState<Recipe[] | null>(null);
+interface UseRecipeReturn {
+  recipes: Recipe[] | null;
+  loading: boolean;
+  cuisines: string[];
+}
+
+const useRecipe = (filterOption?: FilterOptions): UseRecipeReturn => {
+  const [allRecipes, setAllRecipes] = useState<Recipe[] | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // Create a stable filter reference
-  const stableFilter = useMemo(() => filter, [JSON.stringify(filter)]);
+  // Create a filter reference for favorite filter only
+  // This is filtered via firebase
+  const favoriteFilter = useMemo(() =>
+    filterOption?.favorite ? { favorite: filterOption.favorite } : undefined,
+    [filterOption?.favorite]
+  );
+
+  // Compute cuisines list only when allRecipes changes
+  const cuisines = useMemo(() => {
+    if (!allRecipes) return [];
+    return [...new Set(allRecipes.map(recipe => recipe.cuisine))].sort();
+  }, [allRecipes]);
+
+  // Filter recipes based on selected cuisine
+  const recipes = useMemo(() => {
+    if (!allRecipes) return null;
+    if (!filterOption?.cuisine) return allRecipes;
+    return allRecipes.filter(recipe => recipe.cuisine === filterOption.cuisine);
+  }, [allRecipes, filterOption?.cuisine]);
 
   useEffect(() => {
     setLoading(true);
     const unsubscribe = subscribeToRecipes((fetchedRecipes: Recipe[]) => {
-      setRecipes(fetchedRecipes);
+      setAllRecipes(fetchedRecipes);
       setLoading(false);
-    }, stableFilter);
+    }, favoriteFilter);
 
     return () => unsubscribe();
-  }, [stableFilter]);
+  }, [favoriteFilter]);
 
-  return { recipes, loading };
+  return { recipes, loading, cuisines };
 };
 
 export default useRecipe; 
