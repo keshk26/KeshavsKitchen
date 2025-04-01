@@ -3,6 +3,15 @@ import Recipes from './Recipes';
 import { collection, onSnapshot, query } from '@firebase/firestore';
 import mockRecipes from './recipes.mock';
 
+jest.mock('expo-router', () => ({
+  router: {
+    push: jest.fn()
+  },
+  useNavigation: () => ({
+    setOptions: jest.fn()
+  })
+}));
+
 describe('Recipes', () => {
   beforeEach(() => {
     // Clear all mocks before each test

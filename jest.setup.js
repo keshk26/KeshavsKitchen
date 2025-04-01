@@ -5,12 +5,6 @@ jest.mock('@expo/vector-icons', () => ({
   Ionicons: 'Ionicons',
 }));
 
-jest.mock('expo-router', () => ({
-  router: {
-    push: jest.fn(),
-  },
-}));
-
 // Mock the firebase.config module
 jest.mock('@/firebase/config', () => {
   return {

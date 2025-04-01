@@ -4,6 +4,12 @@ import Favorites from './Favorites';
 import { collection, query, onSnapshot, updateDoc, doc, where } from '@firebase/firestore';
 import mockRecipes from './favoriteRecipes.mock';
 
+jest.mock('expo-router', () => ({
+  useNavigation: () => ({
+    setOptions: jest.fn()
+  })
+}));
+
 describe('Favorites Component', () => {
 
   beforeEach(() => {
