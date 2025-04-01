@@ -12,6 +12,9 @@ const subscribeToRecipes = (
   if (filter?.favorite) {
     q = query(recipesRef, where('favorite', '==', filter.favorite));
   }
+  if (filter?.cuisine) {
+    q = query(recipesRef, where('cuisine', '==', filter.cuisine));
+  }
 
   return onSnapshot(q, (querySnapshot) => {
     const fetchedRecipes = querySnapshot.docs.map(doc => ({
