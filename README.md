@@ -10,8 +10,9 @@ Recipes and I have saved over time. View recipes and save your favorites.
   </tr>
 </table>
 
-## Tech Stack
-
+## Tech Stack and Architecture
+This would be similar to a production app. 
+Other tech considerations would be state management (Zustand, Redux), data fetching (TanStack Query) and networking (SuperAgent/Axios). 
 - TypeScript
 - Expo
 - Firebase Firestore to store recipes
@@ -19,6 +20,7 @@ Recipes and I have saved over time. View recipes and save your favorites.
 - Expo Vector Icons
 - Nativewind (Tailwind)
 - React Native Testing Libarary / Jest
+- Eslint, Prettier, Husky Pre-commit
 
 ## Get started
 
