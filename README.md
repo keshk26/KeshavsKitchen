@@ -1,4 +1,5 @@
 # Keshav's Kitchen - Expo React Native App
+
 Recipes and I have saved over time. View recipes and save your favorites.
 
 <table>
@@ -10,6 +11,7 @@ Recipes and I have saved over time. View recipes and save your favorites.
 </table>
 
 ## Tech Stack
+
 - TypeScript
 - Expo
 - Firebase Firestore to store recipes
@@ -25,18 +27,15 @@ Recipes and I have saved over time. View recipes and save your favorites.
    - Xcode 15.2
    - React Native 0.76.7
    - React 18.3.1
-     
 2. Install pnpm - https://pnpm.io/installation
    ```bash
    curl -fsSL https://get.pnpm.io/install.sh | sh -
    ```
 3. Install node_modules
-      ```bash
+   ```bash
    pnpm install
    ```
-2. Start the app
-
+4. Start the app
    ```bash
    pnpm ios
    ```
-

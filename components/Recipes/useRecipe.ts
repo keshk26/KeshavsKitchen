@@ -14,22 +14,22 @@ const useRecipe = (filterOption?: FilterOptions): UseRecipeReturn => {
 
   // Create a filter reference for favorite filter only
   // This is filtered via firebase
-  const favoriteFilter = useMemo(() =>
-    filterOption?.favorite ? { favorite: filterOption.favorite } : undefined,
+  const favoriteFilter = useMemo(
+    () => (filterOption?.favorite ? { favorite: filterOption.favorite } : undefined),
     [filterOption?.favorite]
   );
 
   // Compute cuisines list only when allRecipes changes
   const cuisines = useMemo(() => {
     if (!allRecipes) return [];
-    return [...new Set(allRecipes.map(recipe => recipe.cuisine))].sort();
+    return [...new Set(allRecipes.map((recipe) => recipe.cuisine))].sort();
   }, [allRecipes]);
 
   // Filter recipes based on selected cuisine
   const recipes = useMemo(() => {
     if (!allRecipes) return null;
     if (!filterOption?.cuisine) return allRecipes;
-    return allRecipes.filter(recipe => recipe.cuisine === filterOption.cuisine);
+    return allRecipes.filter((recipe) => recipe.cuisine === filterOption.cuisine);
   }, [allRecipes, filterOption?.cuisine]);
 
   useEffect(() => {
@@ -45,4 +45,4 @@ const useRecipe = (filterOption?: FilterOptions): UseRecipeReturn => {
   return { recipes, loading, cuisines };
 };
 
-export default useRecipe; 
+export default useRecipe;

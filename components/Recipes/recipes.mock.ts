@@ -6,16 +6,12 @@ const mockRecipes: Recipe[] = [
     name: 'Green Curry Fried Rice',
     cuisine: 'Thai',
     time: 30,
-    ingredients: [
-      '1 cup cooked rice',
-      '2 tsp green curry paste',
-      '1/2 can coconut milk',
-    ],
+    ingredients: ['1 cup cooked rice', '2 tsp green curry paste', '1/2 can coconut milk'],
     instructions: [
       '1. Heat a large pan over medium heat.',
       '2. Add and fry the green curry paste for 2 minute.',
       '3. Add the coconut milk and bring to a boil.',
-      '4. Add the rice and cook until heated through.',
+      '4. Add the rice and cook until heated through.'
     ],
     favorite: false
   },
@@ -43,20 +39,15 @@ const mockRecipes: Recipe[] = [
     name: 'Honey Garlic Shrimp',
     cuisine: 'Chinese',
     time: 20,
-    ingredients: [
-      '1 lb shrimp',
-      '1/2 cup honey',
-      '1/2 cup soy sauce',
-      '1/2 cup garlic',
-    ],
+    ingredients: ['1 lb shrimp', '1/2 cup honey', '1/2 cup soy sauce', '1/2 cup garlic'],
     instructions: [
       '1. Heat a large pan over medium heat.',
       '2. Add and fry the green curry paste for 2 minute.',
       '3. Add the coconut milk and bring to a boil.',
-      '4. Add the rice and cook until heated through.',
+      '4. Add the rice and cook until heated through.'
     ],
     favorite: false
   }
 ];
 
-export default mockRecipes; 
+export default mockRecipes;

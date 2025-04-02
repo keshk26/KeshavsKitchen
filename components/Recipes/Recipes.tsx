@@ -1,10 +1,10 @@
-import { View, Text, ScrollView, ActivityIndicator, Pressable } from 'react-native';
+import { View, ScrollView, ActivityIndicator, Pressable } from 'react-native';
 import useRecipe from './useRecipe';
 import { router, useNavigation } from 'expo-router';
 import updateRecipe from '@/firebase/updateRecipe';
 import { Recipe } from '@/types';
 import RecipeTile from './RecipeTile';
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import CuisineFilterModal from './CuisineFilterModal';
 
@@ -24,12 +24,12 @@ const Recipes = () => {
           testID="filter-button"
         >
           <Ionicons
-            name={selectedCuisine ? "filter" : "filter-outline"}
+            name={selectedCuisine ? 'filter' : 'filter-outline'}
             size={24}
             color="#FF6B6B"
           />
         </Pressable>
-      ),
+      )
     });
   }, [navigation, selectedCuisine]);
 
@@ -80,6 +80,6 @@ const Recipes = () => {
       />
     </>
   );
-}
+};
 
-export default Recipes; 
+export default Recipes;

@@ -2,7 +2,7 @@ import { jest } from '@jest/globals';
 
 // Mock Expo Vector Icons
 jest.mock('@expo/vector-icons', () => ({
-  Ionicons: 'Ionicons',
+  Ionicons: 'Ionicons'
 }));
 
 // Mock the firebase.config module

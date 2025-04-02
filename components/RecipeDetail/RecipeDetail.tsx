@@ -1,7 +1,7 @@
 import { View, Text, ScrollView, ActivityIndicator, Pressable } from 'react-native';
 import useRecipeDetail from './useRecipeDetail';
 import { useLocalSearchParams, useNavigation } from 'expo-router';
-import { useEffect, useState, useCallback, useMemo } from 'react';
+import { useEffect, useCallback, useMemo } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import updateRecipe from '@/firebase/updateRecipe';
 
@@ -35,13 +35,9 @@ const RecipeDetail = () => {
             hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
             testID="favorite-button"
           >
-            <Ionicons
-              name={isFavorite ? "heart" : "heart-outline"}
-              size={24}
-              color="#FF6B6B"
-            />
+            <Ionicons name={isFavorite ? 'heart' : 'heart-outline'} size={24} color="#FF6B6B" />
           </Pressable>
-        ),
+        )
       });
     }
   }, [loading, recipe, isFavorite, toggleFavorite, navigation]);
@@ -65,7 +61,9 @@ const RecipeDetail = () => {
         <View className="mb-6">
           <Text className="mb-2 text-xl font-semibold">Ingredients</Text>
           {recipe.ingredients.map((ingredient, index) => (
-            <Text key={index} className="mb-1 text-gray-600">• <Text>{ingredient}</Text></Text>
+            <Text key={index} className="mb-1 text-gray-600">
+              • <Text>{ingredient}</Text>
+            </Text>
           ))}
         </View>
 
@@ -80,6 +78,6 @@ const RecipeDetail = () => {
       </View>
     </ScrollView>
   );
-}
+};
 
 export default RecipeDetail;

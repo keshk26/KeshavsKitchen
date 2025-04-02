@@ -15,15 +15,10 @@ const CuisineFilterModal: React.FC<CuisineFilterModalProps> = ({
   onClose,
   selectedCuisine,
   onSelectCuisine,
-  cuisines,
+  cuisines
 }) => {
   return (
-    <Modal
-      visible={visible}
-      transparent
-      animationType="fade"
-      onRequestClose={onClose}
-    >
+    <Modal visible={visible} transparent animationType="fade" onRequestClose={onClose}>
       <View className="justify-end flex-1 bg-black/50">
         <View className="p-6 bg-white rounded-t-3xl">
           <View className="flex-row items-center justify-between mb-4">
@@ -63,4 +58,4 @@ const CuisineFilterModal: React.FC<CuisineFilterModalProps> = ({
   );
 };
 
-export default CuisineFilterModal; 
+export default CuisineFilterModal;

@@ -1,5 +1,5 @@
-import { Ionicons } from "@expo/vector-icons";
-import { View, Text, ScrollView } from "react-native";
+import { Ionicons } from '@expo/vector-icons';
+import { View, Text, ScrollView } from 'react-native';
 
 const NoFavorites = () => {
   return (
@@ -12,9 +12,7 @@ const NoFavorites = () => {
         <View className="items-center justify-center w-24 h-24 mb-6 bg-white rounded-full shadow-sm">
           <Ionicons name="heart" size={64} color="#FF6B6B" />
         </View>
-        <Text className="mb-2 text-xl font-semibold text-gray-800">
-          No favorites yet
-        </Text>
+        <Text className="mb-2 text-xl font-semibold text-gray-800">No favorites yet</Text>
         <Text className="text-base leading-6 text-center text-gray-600">
           Your favorite recipes will appear here. Start adding some from the Recipes tab!
         </Text>
@@ -23,4 +21,4 @@ const NoFavorites = () => {
   );
 };
 
-export default NoFavorites
+export default NoFavorites;

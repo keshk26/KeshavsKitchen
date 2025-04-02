@@ -11,7 +11,6 @@ jest.mock('expo-router', () => ({
 }));
 
 describe('Favorites Component', () => {
-
   beforeEach(() => {
     jest.clearAllMocks();
 
@@ -26,9 +25,9 @@ describe('Favorites Component', () => {
 
     // Mock where function
     (where as jest.Mock).mockReturnValue({
-      field: "favorite",
-      operator: "==",
-      type: "where",
+      field: 'favorite',
+      operator: '==',
+      type: 'where',
       value: true
     });
 
@@ -36,17 +35,17 @@ describe('Favorites Component', () => {
     (query as jest.Mock).mockReturnValue({
       ...mockCollectionRef,
       where: {
-        field: "favorite",
-        operator: "==",
-        type: "where",
+        field: 'favorite',
+        operator: '==',
+        type: 'where',
         value: true
       }
     });
 
     // Mock onSnapshot to immediately call the callback with our test data
-    (onSnapshot as jest.Mock).mockImplementation((query, callback) => {
+    (onSnapshot as jest.Mock).mockImplementation((_, callback) => {
       callback({
-        docs: mockRecipes.map(recipe => ({
+        docs: mockRecipes.map((recipe) => ({
           id: recipe.id,
           data: () => recipe,
           exists: () => true
@@ -67,7 +66,7 @@ describe('Favorites Component', () => {
 
   test('should show loading indicator when loading', () => {
     // Mock onSnapshot to delay the callback
-    (onSnapshot as jest.Mock).mockImplementation((query, callback) => {
+    (onSnapshot as jest.Mock).mockImplementation(() => {
       // Don't call callback immediately to simulate loading
       return jest.fn();
     });
@@ -78,7 +77,7 @@ describe('Favorites Component', () => {
 
   test('should show NoFavorites component when there are no favorites', async () => {
     // Mock onSnapshot to return empty data
-    (onSnapshot as jest.Mock).mockImplementation((query, callback) => {
+    (onSnapshot as jest.Mock).mockImplementation((_, callback) => {
       callback({
         docs: []
       });
@@ -120,7 +119,7 @@ describe('Favorites Component', () => {
     await act(async () => {
       const onSnapshotCallback = (onSnapshot as jest.Mock).mock.calls[0][1];
       onSnapshotCallback({
-        docs: mockRecipes.slice(1).map(recipe => ({
+        docs: mockRecipes.slice(1).map((recipe) => ({
           id: recipe.id,
           data: () => recipe,
           exists: () => true

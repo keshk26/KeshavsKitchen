@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ScrollView, ActivityIndicator } from 'react-native';
+import { View, ScrollView, ActivityIndicator } from 'react-native';
 import useRecipe from '../Recipes/useRecipe';
 import { router } from 'expo-router';
 import updateRecipe from '@/firebase/updateRecipe';
@@ -31,9 +31,7 @@ const Favorites = () => {
   }
 
   if (recipes.length === 0) {
-    return (
-      <NoFavorites />
-    );
+    return <NoFavorites />;
   }
 
   return (
@@ -50,6 +48,6 @@ const Favorites = () => {
       </View>
     </ScrollView>
   );
-}
+};
 
-export default Favorites; 
+export default Favorites;

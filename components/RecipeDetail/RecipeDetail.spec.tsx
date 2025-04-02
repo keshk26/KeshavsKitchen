@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react-native';
 import RecipeDetail from './RecipeDetail';
-import { useLocalSearchParams, useNavigation } from 'expo-router';
+import { useLocalSearchParams } from 'expo-router';
 import { doc, onSnapshot, updateDoc } from '@firebase/firestore';
 import { db } from '../../firebase/config';
 import mockRecipe from './recipe.mock';
@@ -92,10 +92,7 @@ describe('RecipeDetail', () => {
     fireEvent.press(favoriteButton);
 
     // Verify updateDoc was called with correct params
-    expect(updateDoc).toHaveBeenCalledWith(
-      mockDocRef,
-      { favorite: true }
-    );
+    expect(updateDoc).toHaveBeenCalledWith(mockDocRef, { favorite: true });
   });
 
   test('should clean up subscription on unmount', () => {

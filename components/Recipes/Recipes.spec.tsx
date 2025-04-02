@@ -32,7 +32,7 @@ describe('Recipes', () => {
     // Mock onSnapshot to immediately call the callback with our test data
     (onSnapshot as jest.Mock).mockImplementation((query, callback) => {
       callback({
-        docs: mockRecipes.map(recipe => ({
+        docs: mockRecipes.map((recipe) => ({
           id: recipe.id,
           data: () => recipe,
           exists: () => true

@@ -11,4 +11,4 @@ export interface Recipe {
 export type FilterOptions = {
   favorite?: boolean;
   cuisine?: string;
-}; 
+};

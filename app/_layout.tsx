@@ -11,4 +11,4 @@ export default function RootLayout() {
       <Redirect href="/(tabs)/recipes" />
     </>
   );
-} 
+}

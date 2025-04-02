@@ -1,7 +1,6 @@
-import { Stack } from 'expo-router';
+import { Stack, router } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { Pressable } from 'react-native';
-import { router } from 'expo-router';
 
 export default function RecipesLayout() {
   return (
@@ -9,7 +8,7 @@ export default function RecipesLayout() {
       <Stack.Screen
         name="index"
         options={{
-          title: "Recipes",
+          title: 'Recipes',
           headerShown: true
         }}
       />
@@ -27,4 +26,4 @@ export default function RecipesLayout() {
       />
     </Stack>
   );
-} 
+}
