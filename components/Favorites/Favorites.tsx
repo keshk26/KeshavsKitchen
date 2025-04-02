@@ -5,7 +5,6 @@ import { router } from 'expo-router';
 import updateRecipe from '@/firebase/updateRecipe';
 import { Recipe } from '@/types';
 import RecipeTile from '../Recipes/RecipeTile';
-import NoFavorites from './NoFavorites';
 
 const Favorites = () => {
   const { recipes, loading } = useRecipe({ favorite: true });
@@ -30,9 +29,9 @@ const Favorites = () => {
     );
   }
 
-  if (recipes.length === 0) {
-    return <NoFavorites />;
-  }
+  // if (recipes.length === 0) {
+  //   return <NoFavorites />;
+  // }
 
   return (
     <ScrollView className="flex-1 bg-bgDefault">
