@@ -24,7 +24,7 @@ Other tech considerations would be state management (Zustand, Redux), data fetch
 
 ## Get started
 
-1. Make sure Xcode is installed, if you want to run on Simulator. Note that this app was created on an older Intel Macbook so the dependencies are slightly older.
+1. Make sure Xcode or Android Studio is installed or install on a device with Expo Go. Note that this app was created on an older Intel Macbook so the dependencies are slightly older.
    - MacOS Ventura
    - Xcode 15.2
    - React Native 0.76.7
@@ -39,5 +39,5 @@ Other tech considerations would be state management (Zustand, Redux), data fetch
    ```
 4. Start the app
    ```bash
-   pnpm ios
+   pnpm ios or pnpm android
    ```
