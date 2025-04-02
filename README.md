@@ -20,7 +20,12 @@ Recipes and I have saved over time. View recipes and save your favorites.
 
 ## Get started
 
-1. Make sure Xcode is installed, if you want to run on Simulator. Note that this app was created on an older Intel Macbook.
+1. Make sure Xcode is installed, if you want to run on Simulator. Note that this app was created on an older Intel Macbook so the dependencies are slightly older.
+   - MacOS Ventura
+   - Xcode 15.2
+   - React Native 0.76.7
+   - React 18.3.1
+     
 2. Install pnpm - https://pnpm.io/installation
    ```bash
    curl -fsSL https://get.pnpm.io/install.sh | sh -

@@ -21,7 +21,7 @@ const CuisineFilterModal: React.FC<CuisineFilterModalProps> = ({
     <Modal
       visible={visible}
       transparent
-      animationType="slide"
+      animationType="fade"
       onRequestClose={onClose}
     >
       <View className="justify-end flex-1 bg-black/50">
