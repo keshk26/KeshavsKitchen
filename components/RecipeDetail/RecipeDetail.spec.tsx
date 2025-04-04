@@ -1,9 +1,16 @@
-import { render, screen, fireEvent } from '@testing-library/react-native';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react-native';
 import RecipeDetail from './RecipeDetail';
 import { useLocalSearchParams } from 'expo-router';
 import { doc, onSnapshot, updateDoc } from '@firebase/firestore';
 import { db } from '../../firebase/config';
 import mockRecipe from './recipe.mock';
+import generateRecipeImage from '@/openai/fetchImage';
+
+// Mock the fetchImage function
+jest.mock('@/openai/fetchImage', () => ({
+  __esModule: true,
+  default: jest.fn(() => Promise.resolve('https://example.com/mock-image.jpg'))
+}));
 
 // Mock expo-router
 jest.mock('expo-router', () => {
@@ -93,6 +100,21 @@ describe('RecipeDetail', () => {
 
     // Verify updateDoc was called with correct params
     expect(updateDoc).toHaveBeenCalledWith(mockDocRef, { favorite: true });
+  });
+
+  test('should generate AI image', async () => {
+    render(<RecipeDetail />);
+    // Find and click the generate AI image button
+    const generateButton = await screen.findByText('GENERATE AI IMAGE');
+    fireEvent.press(generateButton);
+    // Verify updateDoc is called to save the image URL
+    await waitFor(() => {
+      expect(generateRecipeImage).toHaveBeenCalled();
+      expect(updateDoc).toHaveBeenCalledWith(
+        mockDocRef,
+        expect.objectContaining({ imageUrl: expect.any(String) })
+      );
+    });
   });
 
   test('should clean up subscription on unmount', () => {

@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, ActivityIndicator, Pressable } from 'react-native';
+import { View, Text, ScrollView, ActivityIndicator, Pressable, Image } from 'react-native';
 import useRecipeDetail from './useRecipeDetail';
 import { useLocalSearchParams, useNavigation } from 'expo-router';
 import { useEffect, useCallback, useMemo } from 'react';
@@ -7,7 +7,7 @@ import updateRecipe from '@/firebase/updateRecipe';
 
 const RecipeDetail = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const { recipe, loading } = useRecipeDetail(id);
+  const { recipe, loading, imageLoading, generateImage } = useRecipeDetail(id);
   const navigation = useNavigation();
 
   const isFavorite = useMemo(() => {
@@ -53,7 +53,43 @@ const RecipeDetail = () => {
   return (
     <ScrollView className="flex-1 bg-bgDefault">
       <View className="p-4">
+        {/* AI Generated Image Section */}
         <View className="mb-6">
+          {recipe?.imageUrl && !imageLoading ? (
+            <Image
+              testID="ai-image"
+              source={{ uri: recipe?.imageUrl }}
+              className="w-full h-64 rounded-lg"
+              resizeMode="cover"
+            />
+          ) : (
+            <Pressable
+              onPress={generateImage}
+              className="items-center justify-center w-full h-64 bg-gray-100 rounded-lg"
+              disabled={imageLoading}
+            >
+              {imageLoading ? (
+                <ActivityIndicator size="large" color="#FF4B4B" />
+              ) : (
+                <View className="items-center">
+                  <Ionicons name="image-outline" size={48} color="#FF4B4B" />
+                  <Text className="px-4 py-2 mt-2 font-medium text-[#FF4B4B]">
+                    GENERATE AI IMAGE
+                  </Text>
+                </View>
+              )}
+            </Pressable>
+          )}
+        </View>
+        {recipe?.imageUrl && !imageLoading && (
+          <Pressable onPress={generateImage}>
+            <Text className="text-[#FF4B4B] font-semibold text-center text-xl">
+              GENERATE DIFFERENT IMAGE
+            </Text>
+          </Pressable>
+        )}
+
+        <View className="my-6">
           <Text className="text-gray-600">Cuisine: {recipe.cuisine}</Text>
           <Text className="text-gray-600">Time: {recipe.time} minutes</Text>
         </View>

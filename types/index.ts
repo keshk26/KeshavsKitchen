@@ -6,6 +6,7 @@ export interface Recipe {
   ingredients: string[];
   instructions: string[];
   favorite?: boolean;
+  imageUrl?: string;
 }
 
 export type FilterOptions = {
