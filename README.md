@@ -1,6 +1,6 @@
 # Keshav's Kitchen - Expo React Native App
 
-Recipes and I have saved over time. View recipes and save your favorites.
+Recipes and I have saved over time. View and filter recipes and save your favorites.
 
 <table>
   <tr>
@@ -11,7 +11,7 @@ Recipes and I have saved over time. View recipes and save your favorites.
 </table>
 
 ## Tech Stack and Architecture
-This would be similar to a production app. 
+This would be similar to a production app other than multiple envs. 
 Other tech considerations would be state management (Zustand, Redux), data fetching (TanStack Query) and networking (SuperAgent/Axios). 
 - TypeScript
 - Expo
@@ -22,22 +22,24 @@ Other tech considerations would be state management (Zustand, Redux), data fetch
 - React Native Testing Libarary / Jest
 - Eslint, Prettier, Husky Pre-commit
 
-## Get started
+## To run the application
 
-1. Make sure Xcode or Android Studio is installed or install on a device with Expo Go. Note that this app was created on an older Intel Macbook so the dependencies are slightly older.
+1. Email or message me to get the needed .env file.
+2. Make sure Xcode or Android Studio is installed or install on a device with Expo Go. 
+3. Note that this app was created on an older Intel Macbook so the dependencies are slightly older.
    - MacOS Ventura
    - Xcode 15.2
    - React Native 0.76.7
    - React 18.3.1
-2. Install pnpm - https://pnpm.io/installation
+4. Install pnpm - https://pnpm.io/installation
    ```bash
    curl -fsSL https://get.pnpm.io/install.sh | sh -
    ```
-3. Install node_modules
+5. Install node_modules
    ```bash
    pnpm install
    ```
-4. Start the app
+6. Start the app
    ```bash
    pnpm ios or pnpm android
    ```
