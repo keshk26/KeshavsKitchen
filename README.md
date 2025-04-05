@@ -11,18 +11,18 @@ Recipes and I have saved over time. View and filter recipes and save your favori
 </table>
 
 ## Tech Stack and Architecture
-This tech stack would be similar to a production app. 
-Other tech considerations would be state management (Zustand, Redux), data fetching (TanStack Query) and networking (SuperAgent/Axios),
-multi environments and analytics libraries. 
+This tech stack would be similar to a production app.  
 - TypeScript
-- Expo
+- Expo/Expo Router
 - Firebase Firestore to store recipes
 - Open AI to generate images
-- Expo Router
 - Expo Vector Icons
+- Expo Image
 - Nativewind (Tailwind)
 - React Native Testing Libarary / Jest
 - Eslint, Prettier, Husky Pre-commit
+
+Other tech considerations would be state management (Zustand or Redux), data fetching (TanStack Query), networking (SuperAgent/Axios), multi environment configuration and analytics libraries.
 
 ## To run the application
 
