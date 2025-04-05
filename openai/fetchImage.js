@@ -6,7 +6,7 @@ const generateRecipeImage = async (recipe) => {
       apiKey: process.env.EXPO_PUBLIC_OPENAI_API_KEY
     });
 
-    const prompt = `centered image with slight zoom out of ${recipe.cuisine} ${recipe.name} with elegant plating`;
+    const prompt = `${recipe.cuisine} ${recipe.name}. Centered composition, overhead angle, natural lighting but not too zoomed in, on a minimalist ceramic plate. Garnished and styled for restaurant presentation.`;
     const response = await openai.images.generate({
       model: 'dall-e-2',
       prompt,

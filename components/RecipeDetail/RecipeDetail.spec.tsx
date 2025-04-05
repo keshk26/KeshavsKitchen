@@ -6,6 +6,11 @@ import { db } from '../../firebase/config';
 import mockRecipe from './recipe.mock';
 import generateRecipeImage from '@/openai/fetchImage';
 
+// Mock expo-image
+jest.mock('expo-image', () => ({
+  Image: jest.fn()
+}));
+
 // Mock the fetchImage function
 jest.mock('@/openai/fetchImage', () => ({
   __esModule: true,

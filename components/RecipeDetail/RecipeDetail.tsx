@@ -1,4 +1,5 @@
-import { View, Text, ScrollView, ActivityIndicator, Pressable, Image } from 'react-native';
+import { View, Text, ScrollView, ActivityIndicator, Pressable } from 'react-native';
+import { Image as ExpoImage } from 'expo-image';
 import useRecipeDetail from './useRecipeDetail';
 import { useLocalSearchParams, useNavigation } from 'expo-router';
 import { useEffect, useCallback, useMemo } from 'react';
@@ -56,11 +57,12 @@ const RecipeDetail = () => {
         {/* AI Generated Image Section */}
         <View className="mb-6">
           {recipe?.imageUrl && !imageLoading ? (
-            <Image
+            <ExpoImage
               testID="ai-image"
               source={{ uri: recipe?.imageUrl }}
-              className="w-full h-64 rounded-lg"
-              resizeMode="cover"
+              style={{ width: '100%', height: 256, borderRadius: 16 }}
+              contentFit="cover"
+              cachePolicy="memory-disk"
             />
           ) : (
             <Pressable
