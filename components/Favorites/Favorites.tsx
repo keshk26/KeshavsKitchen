@@ -1,18 +1,20 @@
 import React from 'react';
 import { View, ScrollView } from 'react-native';
 import useRecipe from '../Recipes/useRecipe';
-import { router } from 'expo-router';
+import { useRouter } from 'expo-router';
 import updateRecipe from '@/firebase/updateRecipe';
 import { Recipe } from '@/types';
 import SuspenseFallback from '../Global/SuspenseFallback';
+import NoFavorites from './NoFavorites';
 
 const RecipeTile = React.lazy(() => import('../Recipes/RecipeTile'));
 
 const Favorites = () => {
+  const router = useRouter();
   const { recipes } = useRecipe({ favorite: true });
 
   const handleRecipePress = (id: string) => {
-    router.push(`/favorites/${id}`);
+    router.navigate(`/favorites/${id}`);
   };
 
   const handleFavoritePress = async (recipe: Recipe) => {
@@ -27,6 +29,7 @@ const Favorites = () => {
     <SuspenseFallback>
       <ScrollView className="flex-1 bg-bgDefault">
         <View className="p-4">
+          {recipes?.length === 0 && <NoFavorites />}
           {recipes?.map((recipe) => (
             <RecipeTile
               key={recipe.id}

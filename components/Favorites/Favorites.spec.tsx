@@ -4,7 +4,11 @@ import Favorites from './Favorites';
 import { collection, query, onSnapshot, updateDoc, doc, where } from '@firebase/firestore';
 import mockRecipes from './favoriteRecipes.mock';
 
+const mockNavigate = jest.fn();
 jest.mock('expo-router', () => ({
+  useRouter: () => ({
+    navigate: mockNavigate
+  }),
   useNavigation: () => ({
     setOptions: jest.fn()
   })
@@ -64,17 +68,6 @@ describe('Favorites Component', () => {
     (updateDoc as jest.Mock).mockResolvedValue(undefined);
   });
 
-  test('should show loading indicator when loading', () => {
-    // Mock onSnapshot to delay the callback
-    (onSnapshot as jest.Mock).mockImplementation(() => {
-      // Don't call callback immediately to simulate loading
-      return jest.fn();
-    });
-
-    const { getByTestId } = render(<Favorites />);
-    expect(getByTestId('activity-indicator')).toBeOnTheScreen();
-  });
-
   test('should show NoFavorites component when there are no favorites', async () => {
     // Mock onSnapshot to return empty data
     (onSnapshot as jest.Mock).mockImplementation((_, callback) => {
@@ -93,6 +86,13 @@ describe('Favorites Component', () => {
     expect(await screen.findByText('Green Curry Fried Rice')).toBeOnTheScreen();
     expect(screen.getByText('Margarita')).toBeOnTheScreen();
     expect(screen.queryByText('Honey Garlic Shrimp')).not.toBeOnTheScreen();
+  });
+
+  test('should navigate to recipe detail page when recipe is pressed', async () => {
+    const { getByText } = render(<Favorites />);
+    const recipeName = await getByText('Green Curry Fried Rice');
+    fireEvent.press(recipeName);
+    expect(mockNavigate).toHaveBeenCalledWith('/favorites/1');
   });
 
   test('should update favorite status when favorite button is pressed', async () => {

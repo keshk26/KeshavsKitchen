@@ -1,12 +1,13 @@
-import { render, screen } from '@testing-library/react-native';
+import { fireEvent, render, screen } from '@testing-library/react-native';
 import Recipes from './Recipes';
 import { collection, onSnapshot, query } from '@firebase/firestore';
 import mockRecipes from './recipes.mock';
 
+const mockNavigate = jest.fn();
 jest.mock('expo-router', () => ({
-  router: {
-    push: jest.fn()
-  },
+  useRouter: () => ({
+    navigate: mockNavigate
+  }),
   useNavigation: () => ({
     setOptions: jest.fn()
   })
@@ -55,6 +56,13 @@ describe('Recipes', () => {
     expect(screen.getByText('Mexican')).toBeOnTheScreen();
     expect(screen.getByText('5 minutes')).toBeOnTheScreen();
     expect(screen.getByText('5 ingredients')).toBeOnTheScreen();
+  });
+
+  test('Selecting a recipe navigates to the recipe detail page', async () => {
+    const { findByText } = render(<Recipes />);
+    const recipeName = await findByText('Green Curry Fried Rice');
+    fireEvent.press(recipeName);
+    expect(mockNavigate).toHaveBeenCalledWith('/recipes/1');
   });
 
   test('Subscription is cleaned up on unmount', () => {

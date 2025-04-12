@@ -3,7 +3,7 @@ import { ActivityIndicator, View } from 'react-native';
 
 const PageLoading: React.FC = () => (
   <View className="items-center justify-center flex-1 bg-bgDefault">
-    <ActivityIndicator size="large" />
+    <ActivityIndicator testID="activity-indicator" size="large" />
   </View>
 );
 

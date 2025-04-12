@@ -1,6 +1,6 @@
 import { View, ScrollView, Pressable } from 'react-native';
 import useRecipe from './useRecipe';
-import { router, useNavigation } from 'expo-router';
+import { useRouter, useNavigation } from 'expo-router';
 import updateRecipe from '@/firebase/updateRecipe';
 import { Recipe } from '@/types';
 import React, { useEffect, useState } from 'react';
@@ -15,6 +15,7 @@ const Recipes = () => {
   const [isFilterModalVisible, setIsFilterModalVisible] = useState(false);
   const { recipes, cuisines } = useRecipe({ cuisine: selectedCuisine });
   const navigation = useNavigation();
+  const router = useRouter();
 
   useEffect(() => {
     navigation.setOptions({
@@ -36,7 +37,7 @@ const Recipes = () => {
   }, [navigation, selectedCuisine]);
 
   const handleRecipePress = (id: string) => {
-    router.push(`/recipes/${id}`);
+    router.navigate(`/recipes/${id}`);
   };
 
   const handleFavoritePress = async (recipe: Recipe) => {
