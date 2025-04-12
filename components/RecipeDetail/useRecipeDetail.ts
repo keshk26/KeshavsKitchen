@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Recipe } from '@/types';
 import subscribeToRecipe from '@/firebase/subscribeToRecipe';
 import generateRecipeImage from '@/openai/fetchImage';
@@ -17,7 +17,7 @@ const useRecipeDetail = (id: string) => {
     return () => unsubscribe();
   }, [id]);
 
-  const generateImage = async () => {
+  const generateImage = useCallback(async () => {
     if (!recipe) return;
 
     try {
@@ -31,7 +31,7 @@ const useRecipeDetail = (id: string) => {
     } finally {
       setImageLoading(false);
     }
-  };
+  }, [recipe]);
 
   return { recipe, loading, imageLoading, generateImage };
 };

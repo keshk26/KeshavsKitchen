@@ -17,7 +17,7 @@ const subscribeToRecipes = (
   }
 
   return onSnapshot(q, (querySnapshot) => {
-    const fetchedRecipes = querySnapshot.docs.map((doc) => ({
+    const fetchedRecipes: Recipe[] = querySnapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data()
     })) as Recipe[];

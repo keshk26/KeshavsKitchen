@@ -6,9 +6,11 @@ interface RecipeTileProps {
   recipe: Recipe;
   onPress: (id: string) => void;
   onFavoritePress: (recipe: Recipe) => void;
+  testID?: string;
+  accessibilityLabel?: string;
 }
 
-const RecipeTile = ({ recipe, onPress, onFavoritePress }: RecipeTileProps) => {
+const RecipeTile: React.FC<RecipeTileProps> = ({ recipe, onPress, onFavoritePress }) => {
   return (
     <Pressable
       className="flex-row items-center p-4 mb-4 bg-white shadow-sm rounded-xl"

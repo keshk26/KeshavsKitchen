@@ -1,17 +1,19 @@
-import { View, ScrollView, ActivityIndicator, Pressable } from 'react-native';
+import { View, ScrollView, Pressable } from 'react-native';
 import useRecipe from './useRecipe';
 import { router, useNavigation } from 'expo-router';
 import updateRecipe from '@/firebase/updateRecipe';
 import { Recipe } from '@/types';
-import RecipeTile from './RecipeTile';
 import React, { useEffect, useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import CuisineFilterModal from './CuisineFilterModal';
+import SuspenseFallback from '../Global/SuspenseFallback';
+
+const RecipeTile = React.lazy(() => import('./RecipeTile'));
 
 const Recipes = () => {
   const [selectedCuisine, setSelectedCuisine] = useState<string | undefined>(undefined);
   const [isFilterModalVisible, setIsFilterModalVisible] = useState(false);
-  const { recipes, cuisines, loading } = useRecipe({ cuisine: selectedCuisine });
+  const { recipes, cuisines } = useRecipe({ cuisine: selectedCuisine });
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -45,19 +47,11 @@ const Recipes = () => {
     }
   };
 
-  if (loading || !recipes) {
-    return (
-      <View className="items-center justify-center flex-1 bg-bgDefault">
-        <ActivityIndicator size="large" />
-      </View>
-    );
-  }
-
   return (
-    <>
+    <SuspenseFallback>
       <ScrollView className="flex-1 bg-bgDefault">
         <View className="p-4">
-          {recipes.map((recipe) => (
+          {recipes?.map((recipe) => (
             <RecipeTile
               key={recipe.id}
               recipe={recipe}
@@ -78,7 +72,7 @@ const Recipes = () => {
         }}
         cuisines={cuisines}
       />
-    </>
+    </SuspenseFallback>
   );
 };
 

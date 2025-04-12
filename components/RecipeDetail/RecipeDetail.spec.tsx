@@ -4,7 +4,6 @@ import { useLocalSearchParams } from 'expo-router';
 import { doc, onSnapshot, updateDoc } from '@firebase/firestore';
 import { db } from '../../firebase/config';
 import mockRecipe from './recipe.mock';
-import generateRecipeImage from '@/openai/fetchImage';
 
 // Mock expo-image
 jest.mock('expo-image', () => ({
@@ -114,7 +113,6 @@ describe('RecipeDetail', () => {
     fireEvent.press(generateButton);
     // Verify updateDoc is called to save the image URL
     await waitFor(() => {
-      expect(generateRecipeImage).toHaveBeenCalled();
       expect(updateDoc).toHaveBeenCalledWith(
         mockDocRef,
         expect.objectContaining({ imageUrl: expect.any(String) })

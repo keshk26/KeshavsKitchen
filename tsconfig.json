@@ -14,7 +14,8 @@
     ],
     "allowJs": true,
     "resolveJsonModule": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "module": "ES2022"
   },
   "include": [
     "**/*.ts",
