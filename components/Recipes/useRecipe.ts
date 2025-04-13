@@ -8,16 +8,16 @@ interface UseRecipeReturn {
   cuisines: string[];
 }
 
-const useRecipe = (filterOption?: FilterOptions): UseRecipeReturn => {
+const useRecipe = (filterOption: FilterOptions): UseRecipeReturn => {
   const [allRecipes, setAllRecipes] = useState<Recipe[] | null>(null);
   const [loading, setLoading] = useState(true);
 
   // Create a filter reference for favorite filter only
   // This is filtered via firebase
-  const favoriteFilter = useMemo(
-    () => (filterOption?.favorite ? { favorite: filterOption.favorite } : undefined),
-    [filterOption?.favorite]
-  );
+  const favoriteFilter = useMemo(() => {
+    if (!filterOption?.favorite) return;
+    return { favorite: filterOption.favorite };
+  }, [filterOption?.favorite]);
 
   // Compute cuisines list only when allRecipes changes
   const cuisines = useMemo(() => {
@@ -28,7 +28,7 @@ const useRecipe = (filterOption?: FilterOptions): UseRecipeReturn => {
   // Filter recipes based on selected cuisine
   const recipes = useMemo(() => {
     if (!allRecipes) return null;
-    if (!filterOption?.cuisine) return allRecipes;
+    if (!filterOption?.cuisine?.length) return allRecipes;
     return allRecipes.filter((recipe) => recipe.cuisine === filterOption.cuisine);
   }, [allRecipes, filterOption?.cuisine]);
 

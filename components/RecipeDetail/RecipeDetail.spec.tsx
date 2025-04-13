@@ -56,7 +56,7 @@ describe('RecipeDetail', () => {
     });
 
     // Mock updateDoc to resolve immediately
-    (updateDoc as jest.Mock).mockResolvedValue(undefined);
+    (updateDoc as jest.Mock).mockResolvedValue(null);
   });
 
   test('should render the recipe detail screen', async () => {

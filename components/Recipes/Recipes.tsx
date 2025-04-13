@@ -11,7 +11,7 @@ import SuspenseFallback from '../Global/SuspenseFallback';
 const RecipeTile = React.lazy(() => import('./RecipeTile'));
 
 const Recipes = () => {
-  const [selectedCuisine, setSelectedCuisine] = useState<string | undefined>(undefined);
+  const [selectedCuisine, setSelectedCuisine] = useState<string>('');
   const [isFilterModalVisible, setIsFilterModalVisible] = useState(false);
   const { recipes, cuisines } = useRecipe({ cuisine: selectedCuisine });
   const navigation = useNavigation();
@@ -62,7 +62,6 @@ const Recipes = () => {
           ))}
         </View>
       </ScrollView>
-
       <CuisineFilterModal
         visible={isFilterModalVisible}
         onClose={() => setIsFilterModalVisible(false)}

@@ -5,8 +5,8 @@ import { Ionicons } from '@expo/vector-icons';
 interface CuisineFilterModalProps {
   visible: boolean;
   onClose: () => void;
-  selectedCuisine: string | undefined;
-  onSelectCuisine: (cuisine: string | undefined) => void;
+  selectedCuisine: string;
+  onSelectCuisine: (cuisine: string) => void;
   cuisines: string[];
 }
 
@@ -30,13 +30,11 @@ const CuisineFilterModal: React.FC<CuisineFilterModalProps> = ({
 
           <ScrollView className="max-h-96">
             <Pressable
-              onPress={() => onSelectCuisine(undefined)}
+              onPress={() => onSelectCuisine('')}
               className="flex-row items-center justify-between py-3 border-b border-gray-100"
             >
               <Text className="text-lg">All Cuisines</Text>
-              {selectedCuisine === undefined && (
-                <Ionicons name="checkmark" size={24} color="#FF6B6B" />
-              )}
+              {!selectedCuisine && <Ionicons name="checkmark" size={24} color="#FF6B6B" />}
             </Pressable>
 
             {cuisines.map((cuisine) => (

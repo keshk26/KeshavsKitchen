@@ -65,7 +65,7 @@ describe('Favorites Component', () => {
       collection,
       type: 'document'
     }));
-    (updateDoc as jest.Mock).mockResolvedValue(undefined);
+    (updateDoc as jest.Mock).mockResolvedValue(null);
   });
 
   test('should show NoFavorites component when there are no favorites', async () => {
