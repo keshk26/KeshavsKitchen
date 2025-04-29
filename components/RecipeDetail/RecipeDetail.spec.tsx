@@ -13,7 +13,12 @@ jest.mock('expo-image', () => ({
 // Mock the fetchImage function
 jest.mock('@/openai/fetchImage', () => ({
   __esModule: true,
-  default: jest.fn(() => Promise.resolve('https://example.com/mock-image.jpg'))
+  default: jest.fn(() =>
+    Promise.resolve({
+      imageUrl: 'https://example.com/mock-image.jpg',
+      imageExpiration: '2025-04-29T23:48:55Z'
+    })
+  )
 }));
 
 // Mock expo-router
@@ -115,7 +120,10 @@ describe('RecipeDetail', () => {
     await waitFor(() => {
       expect(updateDoc).toHaveBeenCalledWith(
         mockDocRef,
-        expect.objectContaining({ imageUrl: expect.any(String) })
+        expect.objectContaining({
+          imageUrl: expect.any(String),
+          imageExpiration: expect.any(String)
+        })
       );
     });
   });

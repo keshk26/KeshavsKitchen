@@ -22,9 +22,9 @@ const useRecipeDetail = (id: string) => {
 
     try {
       setImageLoading(true);
-      const imageUrl = await generateRecipeImage(recipe);
+      const { imageUrl, imageExpiration } = await generateRecipeImage(recipe);
       if (imageUrl) {
-        await updateRecipe(recipe.id, { imageUrl });
+        await updateRecipe(recipe.id, { imageUrl, imageExpiration });
       }
     } catch (error) {
       console.error('Error generating image:', error);

@@ -15,6 +15,10 @@ const RecipeDetail = () => {
     return recipe?.favorite || false;
   }, [recipe]);
 
+  const imageExpired = useMemo(() => {
+    return recipe?.imageExpiration ? new Date(recipe.imageExpiration) < new Date() : false;
+  }, [recipe]);
+
   const toggleFavorite = useCallback(async () => {
     if (!recipe) return;
     const toggledFavorite = !isFavorite;
@@ -56,7 +60,7 @@ const RecipeDetail = () => {
       <View className="p-4">
         {/* AI Generated Image Section */}
         <View className="mb-6">
-          {recipe?.imageUrl && !imageLoading ? (
+          {recipe?.imageUrl && !imageExpired && !imageLoading ? (
             <ExpoImage
               testID="ai-image"
               source={{ uri: recipe?.imageUrl }}
@@ -86,7 +90,7 @@ const RecipeDetail = () => {
         {recipe?.imageUrl && !imageLoading && (
           <Pressable onPress={generateImage}>
             <Text className="text-[#FF4B4B] font-semibold text-center text-xl">
-              GENERATE DIFFERENT IMAGE
+              GENERATE {imageExpired ? 'NEW' : 'DIFFERENT'} IMAGE
             </Text>
           </Pressable>
         )}

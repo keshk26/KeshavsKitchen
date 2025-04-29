@@ -7,6 +7,7 @@ export interface Recipe {
   instructions: string[];
   favorite?: boolean;
   imageUrl?: string;
+  imageExpiration?: string;
 }
 
 export type FilterOptions = {
