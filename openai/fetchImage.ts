@@ -14,7 +14,6 @@ const generateRecipeImage: GenerateRecipeImage = async (recipe) => {
       model: 'dall-e-2',
       n: 1,
       size: '256x256',
-      quality: 'standard',
       prompt
     };
 
